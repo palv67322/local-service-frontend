@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
 export const AuthContext = createContext();
-const API_URL = 'import.meta.env.VITE_API_BASE_URL/api';
+const API_URL = 'https://backend-1-1zqx.onrender.com//api';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

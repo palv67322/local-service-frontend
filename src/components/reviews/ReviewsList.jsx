@@ -11,7 +11,7 @@ function ReviewsList({ serviceId }) {
         const fetchReviews = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(`import.meta.env.VITE_API_BASE_URL/api/reviews/${serviceId}`);
+                const res = await axios.get(`https://backend-1-1zqx.onrender.com//api/reviews/${serviceId}`);
                 setReviews(res.data);
             } catch (error) {
                 console.error("Failed to fetch reviews:", error);

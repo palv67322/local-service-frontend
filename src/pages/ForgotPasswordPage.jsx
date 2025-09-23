@@ -12,7 +12,7 @@ function ForgotPasswordPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const promise = axios.post('import.meta.env.VITE_API_BASE_URL/api/auth/forgot-password', { email });
+    const promise = axios.post('https://backend-1-1zqx.onrender.com//api/auth/forgot-password', { email });
 
     toast.promise(promise, {
       loading: 'Sending reset link...',

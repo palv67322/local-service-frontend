@@ -21,7 +21,7 @@ function ServiceDetailPage() {
       setService(null);
 
       try {
-        const response = await axios.get(`import.meta.env.VITE_API_BASE_URL/api/users/services/${serviceId}`);
+        const response = await axios.get(`https://backend-1-1zqx.onrender.com//api/users/services/${serviceId}`);
         setService(response.data);
       } catch (err) {
         const errorMessage = err.response?.data?.message || 'Could not load service details.';
@@ -45,7 +45,7 @@ function ServiceDetailPage() {
     const toastId = toast.loading('Initiating payment...');
 
     try {
-      const orderResponse = await axios.post('import.meta.env.VITE_API_BASE_URL/api/payments/create-order', { serviceId });
+      const orderResponse = await axios.post('https://backend-1-1zqx.onrender.com//api/payments/create-order', { serviceId });
       const order = orderResponse.data;
 
       const options = {
@@ -65,7 +65,7 @@ function ServiceDetailPage() {
           };
           
           try {
-            const verifyPromise = axios.post('import.meta.env.VITE_API_BASE_URL/api/payments/verify-payment', verificationData);
+            const verifyPromise = axios.post('https://backend-1-1zqx.onrender.com//api/payments/verify-payment', verificationData);
             toast.promise(verifyPromise, {
                 loading: 'Verifying payment...',
                 success: 'Booking confirmed successfully!',
