@@ -33,7 +33,7 @@ function RegisterPage() {
       return toast.error("Please enter your email first.");
     }
     try {
-      const promise = axios.post('http://localhost:5000/api/auth/send-otp', { email: formData.email });
+      const promise = axios.post('import.meta.env.VITE_API_BASE_URL/api/auth/send-otp', { email: formData.email });
       toast.promise(promise, {
         loading: 'Sending OTP...',
         success: 'OTP sent successfully!',
@@ -66,7 +66,7 @@ function RegisterPage() {
     }
 
     try {
-        const promise = axios.post('http://localhost:5000/api/auth/register', registrationData);
+        const promise = axios.post('import.meta.env.VITE_API_BASE_URL/api/auth/register', registrationData);
         
         toast.promise(promise, {
             loading: 'Creating your account...',

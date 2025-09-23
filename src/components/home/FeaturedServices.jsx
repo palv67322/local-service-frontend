@@ -11,7 +11,7 @@ function FeaturedServices() {
     const fetchServices = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('http://localhost:5000/api/users/services');
+        const response = await axios.get('import.meta.env.VITE_API_BASE_URL/api/users/services');
         // Sirf pehle 3 services dikhayein
         setServices(response.data.slice(0, 3));
       } catch (error) {

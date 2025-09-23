@@ -15,7 +15,7 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const promise = axios.post('http://localhost:5000/api/contact', formData);
+    const promise = axios.post('import.meta.env.VITE_API_BASE_URL/api/contact', formData);
     
     toast.promise(promise, {
         loading: 'Sending message...',

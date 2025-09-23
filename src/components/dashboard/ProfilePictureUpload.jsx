@@ -29,7 +29,7 @@ function ProfilePictureUpload() {
       const downloadURL = await getDownloadURL(snapshot.ref);
 
       // Step 2: Save URL to our backend
-      const res = await axios.put('http://localhost:5000/api/auth/update-picture', { imageUrl: downloadURL });
+      const res = await axios.put('import.meta.env.VITE_API_BASE_URL/api/auth/update-picture', { imageUrl: downloadURL });
 
       // Step 3: Update context
       updateUserContext({ user: res.data.user }); // Assuming provider data doesn't change
