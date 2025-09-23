@@ -12,7 +12,7 @@ function ProviderBookings() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await axios.get('https://backend-1-1zqx.onrender.com//api/bookings/my-bookings/provider');
+      const res = await axios.get('https://backend-1-1zqx.onrender.com/api/bookings/my-bookings/provider');
       setBookings(res.data);
     } catch (error) {
       toast.error('Failed to fetch bookings.');
@@ -27,7 +27,7 @@ function ProviderBookings() {
   }, [token]);
 
   const handleStatusChange = async (bookingId, newStatus) => {
-    const promise = axios.put(`https://backend-1-1zqx.onrender.com//api/bookings/${bookingId}/status`, { status: newStatus });
+    const promise = axios.put(`https://backend-1-1zqx.onrender.com/api/bookings/${bookingId}/status`, { status: newStatus });
     toast.promise(promise, {
         loading: 'Updating status...',
         success: 'Status updated successfully!',

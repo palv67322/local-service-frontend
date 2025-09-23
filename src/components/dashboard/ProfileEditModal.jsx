@@ -26,7 +26,7 @@ function ProfileEditModal({ isOpen, onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const promise = axios.put('https://backend-1-1zqx.onrender.com//api/auth/update', formData);
+    const promise = axios.put('https://backend-1-1zqx.onrender.com/api/auth/update', formData);
     toast.promise(promise, {
       loading: 'Updating profile...',
       success: 'Profile updated successfully!',

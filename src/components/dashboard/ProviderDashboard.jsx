@@ -16,7 +16,7 @@ function ProviderDashboard() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await axios.get('https://backend-1-1zqx.onrender.com//api/services/my-services');
+      const res = await axios.get('https://backend-1-1zqx.onrender.com/api/services/my-services');
       setServices(res.data);
     } catch (error) {
       toast.error('Failed to fetch services.');
@@ -32,8 +32,8 @@ function ProviderDashboard() {
 
   const handleSaveService = async (serviceData) => {
     const promise = editingService
-      ? axios.put(`https://backend-1-1zqx.onrender.com//api/services/${editingService._id}`, serviceData)
-      : axios.post('https://backend-1-1zqx.onrender.com//api/services', serviceData);
+      ? axios.put(`https://backend-1-1zqx.onrender.com/api/services/${editingService._id}`, serviceData)
+      : axios.post('https://backend-1-1zqx.onrender.com/api/services', serviceData);
 
     toast.promise(promise, {
       loading: 'Saving service...',
@@ -54,7 +54,7 @@ function ProviderDashboard() {
   const handleDeleteService = async (serviceId) => {
     if (!window.confirm('Are you sure you want to delete this service?')) return;
     
-    const promise = axios.delete(`https://backend-1-1zqx.onrender.com//api/services/${serviceId}`);
+    const promise = axios.delete(`https://backend-1-1zqx.onrender.com/api/services/${serviceId}`);
     toast.promise(promise, {
       loading: 'Deleting service...',
       success: 'Service deleted successfully!',
