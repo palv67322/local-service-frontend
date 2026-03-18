@@ -15,7 +15,7 @@ function ManageAvailabilityModal({ isOpen, onClose, serviceId, serviceName }) {
     if (!serviceId) return;
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:5000/api/services/${serviceId}/availability`);
+      const res = await axios.get(`https://local-service-backend-nqmi.onrender.com/api/services/${serviceId}/availability`);
       // Sort dates
       const sortedAvailability = res.data.sort((a, b) => new Date(a.date) - new Date(b.date));
       setAvailability(sortedAvailability);
@@ -39,21 +39,21 @@ function ManageAvailabilityModal({ isOpen, onClose, serviceId, serviceName }) {
     if (!date || slotsArray.length === 0) {
       return toast.error('Please select a date and add time slots.');
     }
-    const promise = axios.post(`http://localhost:5000/api/services/${serviceId}/availability`, { date, timeSlots: slotsArray });
+    const promise = axios.post(`https://local-service-backend-nqmi.onrender.com/api/services/${serviceId}/availability`, { date, timeSlots: slotsArray });
     toast.promise(promise, { loading: 'Adding slots...', success: 'Availability updated!', error: 'Failed to add.' });
     try { await promise; setTimeSlots(''); fetchAvailability(); } catch (error) { console.error(error); }
   };
   
   const handleDeleteSlot = async (dateId, slotId) => {
       if(!window.confirm('Are you sure you want to delete this time slot?')) return;
-      const promise = axios.delete(`http://localhost:5000/api/services/${serviceId}/availability/${dateId}/slots/${slotId}`);
+      const promise = axios.delete(`https://local-service-backend-nqmi.onrender.com/api/services/${serviceId}/availability/${dateId}/slots/${slotId}`);
       toast.promise(promise, { loading: 'Deleting slot...', success: 'Slot deleted!', error: (err) => err.response?.data?.message || 'Failed to delete.' });
       try { await promise; fetchAvailability(); } catch (error) { console.error(error); }
   };
   
   const handleDeleteDate = async (dateId) => {
       if(!window.confirm('Are you sure you want to delete all slots for this date?')) return;
-      const promise = axios.delete(`http://localhost:5000/api/services/${serviceId}/availability/${dateId}`);
+      const promise = axios.delete(`https://local-service-backend-nqmi.onrender.com/api/services/${serviceId}/availability/${dateId}`);
       toast.promise(promise, { loading: 'Deleting date...', success: 'Date deleted!', error: (err) => err.response?.data?.message || 'Failed to delete.' });
       try { await promise; fetchAvailability(); } catch (error) { console.error(error); }
   };

@@ -16,7 +16,7 @@ function UserDashboard() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/bookings/my-bookings/user');
+      const res = await axios.get('https://local-service-backend-nqmi.onrender.com/api/bookings/my-bookings/user');
       setBookings(res.data);
     } catch (error) {
       toast.error('Failed to fetch bookings.');

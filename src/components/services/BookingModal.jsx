@@ -19,7 +19,7 @@ function BookingModal({ isOpen, onClose, service }) {
       // Fetch availability jab modal khule
       const fetchAvailability = async () => {
         try {
-          const res = await axios.get(`http://localhost:5000/api/services/${service._id}/availability`);
+          const res = await axios.get(`https://local-service-backend-nqmi.onrender.com/api/services/${service._id}/availability`);
           setAvailability(res.data);
         } catch (error) {
           toast.error('Failed to load availability.');
@@ -48,7 +48,7 @@ function BookingModal({ isOpen, onClose, service }) {
     const toastId = toast.loading('Initiating payment...');
 
     try {
-      const orderResponse = await axios.post('http://localhost:5000/api/payments/create-order', { serviceId: service._id });
+      const orderResponse = await axios.post('https://local-service-backend-nqmi.onrender.com/api/payments/create-order', { serviceId: service._id });
       const order = orderResponse.data;
 
       const options = {
@@ -65,7 +65,7 @@ function BookingModal({ isOpen, onClose, service }) {
             bookingTime: selectedSlot,
           };
           
-          const verifyPromise = axios.post('http://localhost:5000/api/payments/verify-payment', verificationData);
+          const verifyPromise = axios.post('https://local-service-backend-nqmi.onrender.com/api/payments/verify-payment', verificationData);
           toast.promise(verifyPromise, {
               loading: 'Verifying payment...',
               success: 'Booking confirmed successfully!',

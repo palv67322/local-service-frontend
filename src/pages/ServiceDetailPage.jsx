@@ -23,7 +23,7 @@ function ServiceDetailPage() {
       setService(null);
 
       try {
-        const response = await axios.get(`http://localhost:5000/api/users/services/${serviceId}`);
+        const response = await axios.get(`https://local-service-backend-nqmi.onrender.com/api/users/services/${serviceId}`);
         setService(response.data);
       } catch (err) {
         const errorMessage = err.response?.data?.message || 'Could not load service details.';

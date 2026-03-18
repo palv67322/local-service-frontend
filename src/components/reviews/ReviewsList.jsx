@@ -11,7 +11,7 @@ function ReviewsList({ serviceId }) {
         const fetchReviews = async () => {
             try {
                 setLoading(true);
-                const res = await axios.get(`http://localhost:5000/api/reviews/${serviceId}`);
+                const res = await axios.get(`https://local-service-backend-nqmi.onrender.com/api/reviews/${serviceId}`);
                 setReviews(res.data);
             } catch (error) {
                 console.error("Failed to fetch reviews:", error);

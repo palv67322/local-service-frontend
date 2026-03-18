@@ -13,7 +13,7 @@ function AddReviewModal({ isOpen, onClose, booking, onReviewSubmitted }) {
         return toast.error('Please write a comment.');
     }
     
-    const promise = axios.post(`http://localhost:5000/api/reviews/${booking._id}`, { rating, comment });
+    const promise = axios.post(`https://local-service-backend-nqmi.onrender.com/api/reviews/${booking._id}`, { rating, comment });
     
     toast.promise(promise, {
         loading: 'Submitting your review...',

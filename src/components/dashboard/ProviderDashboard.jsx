@@ -19,7 +19,7 @@ function ProviderDashboard() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await axios.get('http://localhost:5000/api/services/my-services');
+      const res = await axios.get('https://local-service-backend-nqmi.onrender.com/api/services/my-services');
       setServices(res.data);
     } catch (error) {
       toast.error('Failed to fetch services.');
@@ -35,8 +35,8 @@ function ProviderDashboard() {
 
   const handleSaveService = async (serviceData) => {
     const promise = editingService
-      ? axios.put(`http://localhost:5000/api/services/${editingService._id}`, serviceData)
-      : axios.post('http://localhost:5000/api/services', serviceData);
+      ? axios.put(`https://local-service-backend-nqmi.onrender.com/api/services/${editingService._id}`, serviceData)
+      : axios.post('https://local-service-backend-nqmi.onrender.com/api/services', serviceData);
 
     toast.promise(promise, {
       loading: 'Saving service...',
@@ -57,7 +57,7 @@ function ProviderDashboard() {
   const handleDeleteService = async (serviceId) => {
     if (!window.confirm('Are you sure you want to delete this service?')) return;
     
-    const promise = axios.delete(`http://localhost:5000/api/services/${serviceId}`);
+    const promise = axios.delete(`https://local-service-backend-nqmi.onrender.com/api/services/${serviceId}`);
     toast.promise(promise, {
       loading: 'Deleting service...',
       success: 'Service deleted successfully!',
