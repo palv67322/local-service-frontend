@@ -3,20 +3,23 @@ import { AuthContext } from '../../context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import ServiceModal from './ServiceModal';
+import ManageAvailabilityModal from './ManageAvailabilityModal';
 import Button from '../common/Button';
 
 function ProviderDashboard() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+  const [isAvailModalOpen, setIsAvailModalOpen] = useState(false);
   const [editingService, setEditingService] = useState(null);
+  const [selectedService, setSelectedService] = useState(null);
   const { token } = useContext(AuthContext);
 
   const fetchServices = async () => {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await axios.get('https://backend-1-1zqx.onrender.com/api/services/my-services');
+      const res = await axios.get('http://localhost:5000/api/services/my-services');
       setServices(res.data);
     } catch (error) {
       toast.error('Failed to fetch services.');
@@ -32,8 +35,8 @@ function ProviderDashboard() {
 
   const handleSaveService = async (serviceData) => {
     const promise = editingService
-      ? axios.put(`https://backend-1-1zqx.onrender.com/api/services/${editingService._id}`, serviceData)
-      : axios.post('https://backend-1-1zqx.onrender.com/api/services', serviceData);
+      ? axios.put(`http://localhost:5000/api/services/${editingService._id}`, serviceData)
+      : axios.post('http://localhost:5000/api/services', serviceData);
 
     toast.promise(promise, {
       loading: 'Saving service...',
@@ -44,7 +47,7 @@ function ProviderDashboard() {
     try {
       await promise;
       fetchServices(); // Refresh list
-      setIsModalOpen(false);
+      setIsServiceModalOpen(false);
       setEditingService(null);
     } catch (error) {
       console.error(error);
@@ -54,7 +57,7 @@ function ProviderDashboard() {
   const handleDeleteService = async (serviceId) => {
     if (!window.confirm('Are you sure you want to delete this service?')) return;
     
-    const promise = axios.delete(`https://backend-1-1zqx.onrender.com/api/services/${serviceId}`);
+    const promise = axios.delete(`http://localhost:5000/api/services/${serviceId}`);
     toast.promise(promise, {
       loading: 'Deleting service...',
       success: 'Service deleted successfully!',
@@ -68,14 +71,19 @@ function ProviderDashboard() {
       console.error(error);
     }
   };
-  
+
+  const openManageAvailModal = (service) => {
+    setSelectedService(service);
+    setIsAvailModalOpen(true);
+  };
+
   if (loading) return <div>Loading your services...</div>;
 
   return (
     <div>
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl font-bold text-gray-800">My Services</h2>
-        <Button onClick={() => { setEditingService(null); setIsModalOpen(true); }}>Add New Service</Button>
+        <Button onClick={() => { setEditingService(null); setIsServiceModalOpen(true); }}>Add New Service</Button>
       </div>
       {services.length > 0 ? (
         <div className="space-y-4">
@@ -86,7 +94,8 @@ function ProviderDashboard() {
                 <p className="text-sm text-gray-600">{service.category} - ₹{service.price}</p>
               </div>
               <div className="space-x-2">
-                <Button onClick={() => { setEditingService(service); setIsModalOpen(true); }} className="bg-yellow-500 hover:bg-yellow-600">Edit</Button>
+                <Button onClick={() => openManageAvailModal(service)} className="bg-green-500 hover:bg-green-600">Availability</Button>
+                <Button onClick={() => { setEditingService(service); setIsServiceModalOpen(true); }} className="bg-yellow-500 hover:bg-yellow-600">Edit</Button>
                 <Button onClick={() => handleDeleteService(service._id)} className="bg-red-600 hover:bg-red-700">Delete</Button>
               </div>
             </div>
@@ -95,14 +104,20 @@ function ProviderDashboard() {
       ) : (
         <div className="text-center py-10 bg-gray-50 rounded-lg">
           <p>You haven't added any services yet.</p>
-          <Button onClick={() => { setEditingService(null); setIsModalOpen(true); }} className="mt-4">Add Your First Service</Button>
+          <Button onClick={() => { setEditingService(null); setIsServiceModalOpen(true); }} className="mt-4">Add Your First Service</Button>
         </div>
       )}
       <ServiceModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        isOpen={isServiceModalOpen} 
+        onClose={() => setIsServiceModalOpen(false)} 
         onSave={handleSaveService} 
         service={editingService} 
+      />
+      <ManageAvailabilityModal 
+        isOpen={isAvailModalOpen}
+        onClose={() => setIsAvailModalOpen(false)}
+        serviceId={selectedService?._id}
+        serviceName={selectedService?.name}
       />
     </div>
   );

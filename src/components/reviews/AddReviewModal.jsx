@@ -13,7 +13,7 @@ function AddReviewModal({ isOpen, onClose, booking, onReviewSubmitted }) {
         return toast.error('Please write a comment.');
     }
     
-    const promise = axios.post(`https://backend-1-1zqx.onrender.com/api/reviews/${booking._id}`, { rating, comment });
+    const promise = axios.post(`http://localhost:5000/api/reviews/${booking._id}`, { rating, comment });
     
     toast.promise(promise, {
         loading: 'Submitting your review...',
@@ -33,7 +33,7 @@ function AddReviewModal({ isOpen, onClose, booking, onReviewSubmitted }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">Leave a Review for</h2>
         <p className="text-lg text-indigo-600 mb-6">{booking.service.name}</p>

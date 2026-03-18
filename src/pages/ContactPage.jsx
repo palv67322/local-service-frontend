@@ -15,7 +15,7 @@ function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    const promise = axios.post('https://backend-1-1zqx.onrender.com/api/contact', formData);
+    const promise = axios.post('http://localhost:5000/api/contact', formData);
     
     toast.promise(promise, {
         loading: 'Sending message...',

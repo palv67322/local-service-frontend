@@ -18,7 +18,7 @@ function ResetPasswordPage() {
       return toast.error('Passwords do not match.');
     }
     setLoading(true);
-    const promise = axios.put(`https://backend-1-1zqx.onrender.com/api/auth/reset-password/${resettoken}`, { password });
+    const promise = axios.put(`http://localhost:5000/api/auth/reset-password/${resettoken}`, { password });
 
     toast.promise(promise, {
       loading: 'Resetting password...',

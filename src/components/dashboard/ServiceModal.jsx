@@ -56,7 +56,7 @@ function ServiceModal({ isOpen, onClose, onSave, service }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6">{service ? 'Edit Service' : 'Add New Service'}</h2>
         <form onSubmit={handleUploadAndSave} className="space-y-4">

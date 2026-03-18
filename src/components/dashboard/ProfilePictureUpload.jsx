@@ -29,7 +29,7 @@ function ProfilePictureUpload() {
       const downloadURL = await getDownloadURL(snapshot.ref);
 
       // Step 2: Save URL to our backend
-      const res = await axios.put('https://backend-1-1zqx.onrender.com/api/auth/update-picture', { imageUrl: downloadURL });
+      const res = await axios.put('http://localhost:5000/api/auth/update-picture', { imageUrl: downloadURL });
 
       // Step 3: Update context
       updateUserContext({ user: res.data.user }); // Assuming provider data doesn't change

@@ -13,7 +13,7 @@ function ServicesPage() {
     const fetchServices = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://backend-1-1zqx.onrender.com/api/users/services');
+        const response = await axios.get('http://localhost:5000/api/users/services');
         setServices(response.data);
       } catch (error) {
         console.error("Failed to fetch services:", error);

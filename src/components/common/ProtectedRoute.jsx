@@ -15,7 +15,6 @@ function ProtectedRoute({ children }) {
     return <Navigate to="/login" replace />;
   }
 
-  // Agar token hai, toh jo page maanga gaya hai, woh dikhayein
   return children;
 }
 
