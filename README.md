@@ -84,7 +84,8 @@ Plaintext
 ⚙️ Installation & Setup
 1. Clone the repository
 Bash
-git clone https://github.com/YOUR_USERNAME/local-service-pro.git
+git clone https://github.com/palv67322/local-service-frontend
+git clone https://github.com/palv67322/local-service-backend
 2. Backend Setup
 Bash
 cd local-service-backend
